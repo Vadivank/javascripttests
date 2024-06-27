@@ -31,7 +31,7 @@ const initSlider = () => {
     prevImageGenerate();
 };
 
-const nextImageGenerate = () => {
+const nextImageGenerate = (w = false) => {
     let nextImage = activeImage + 1;
     if (nextImage >= images.length) {
         nextImage = 0;
@@ -39,6 +39,9 @@ const nextImageGenerate = () => {
     const img = document.createElement('img');
     img.alt = '';
     img.src = './images/' + images[nextImage];
+    if (w) {
+        img.style.width = 0;
+    }
     sliderPlace.append(img);
 };
 
@@ -67,7 +70,16 @@ const nextSlide = () => {
         activeImage = 0;
     }
     // document.querySelector('.slider-line img').remove();
-    nextImageGenerate();
+    nextImageGenerate(true);
+
+    animate({
+        duration: 1000,
+        draw: function (progress) {
+            document.querySelector('.slider-line img:last-child').style.width = (widthOffset * progress) + 'px';
+        },
+        removeElement: null
+    });
+
     animate({
         duration: 1000,
         draw: function (progress) {
@@ -89,6 +101,15 @@ const prevSlide = () => {
     }
     // document.querySelector('.slider-line img:last-child').remove();
     prevImageGenerate(true);
+
+    animate({
+        duration: 1000,
+        draw: function (progress) {
+            document.querySelector('.slider-line img:last-child').style.width = (widthOffset * (1- progress)) + 'px';
+        },
+        removeElement: null
+    });
+
     animate({
         duration: 1000,
         draw: function (progress) {
@@ -103,7 +124,7 @@ initSlider();
 document.querySelector('.next-button').addEventListener('click', nextSlide);
 document.querySelector('.prev-button').addEventListener('click', prevSlide);
 
-const animate = ({ duration, draw, removeElement }) => {
+async function animate ({ duration, draw, removeElement }) {
     const start = performance.now();
 
     requestAnimationFrame(function animate(time) {
@@ -117,7 +138,7 @@ const animate = ({ duration, draw, removeElement }) => {
         if (step < 1) {
             requestAnimationFrame(animate);
         } else {
-            removeElement.remove();
+            if (removeElement) removeElement.remove();
             flag = true;
         }
     });
