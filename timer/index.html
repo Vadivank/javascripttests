@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Таймер</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+
+        <div class="dateForm">
+            <button class="buttonClear">Сбросить таймер</button>
+
+            <label for="date">Дата:</label>
+            <input class="date" type="date" id="date" name="date" />
+
+            <label for="time">Время:</label>
+            <input class="time" type="time" id="time" name="time" value="00:00" />
+        </div>
+
+        <div class="countdown">
+            <p class="timer">
+                <span id="days"></span>
+                <span class="timer-unit">Days</span>
+                <span id="hours"></span>
+                <span class="timer-unit">Hours</span>
+                <span id="minutes"></span>
+                <span class="timer-unit">Minutes</span>
+                <span id="seconds"></span>
+                <span class="timer-unit">Seconds</span>
+            </p>
+        </div>
+
+        <script src="script.js"></script>
+
+    </body>
+</html>
