@@ -1,0 +1,53 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to right, #222, #555);
+    color: #fff;
+}
+
+#drum-kit {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.key {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    /* transition: transform 0.1s ease; */
+    transition: all 0.07s ease;
+}
+
+.key.active {
+    transform: scale(1.1);
+    border-color: #ffc600;
+    box-shadow: 0 0 10px #ffc600;
+    color: #ffc600;
+}
+
+.key:active,
+.key:focus {
+    outline: none;
+    transform: scale(0.95);
+}
+
+@media (max-width: 600px) {
+    .key {
+        width: 20px;
+        height: 20px;
+        font-size: 14px;
+        /* Adjust font size for smaller screens */
+    }
+}
